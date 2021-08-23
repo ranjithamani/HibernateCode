@@ -1,0 +1,28 @@
+configuration
+
+1. Configuration  configure();
+2.Configuration   addClass(Class persistentClass);
+3.SessionFactory   bluidSessionFactory();
+
+SessionFactory
+
+1.  Session openSession();
+2. boolean   isClosed();
+
+Session
+1.Transaction  beginTransaction();
+2.Transaction getTransaction();
+3.void close();
+4.Query createQuery(String queryString);
+5.Criteria createCriteria(Class persistentClass);
+6.void  update(Object object);
+7.Serializable   save(Object object);
+8.Object  get(String entityName ,Serializable id);
+9. NativeQuery  createSQLQuery(String queryString);
+10. void   delete(Object object);
+11. void load(Object object,Serializable id);
+
+Transaction
+1. void commit();
+2. void rollback();
+  
