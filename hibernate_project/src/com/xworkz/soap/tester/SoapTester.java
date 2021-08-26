@@ -9,10 +9,12 @@ public class SoapTester {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		SoapDTO dto = new SoapDTO(2, "Varun Dhawan", "Sandal", true, false, SoapType.HUMAN);
+		SoapDTO dto = new SoapDTO(3, "Varun Dhawan", "Sandal", true, false, SoapType.HUMAN);
 
 		SoapDAO dao = new SoapDAOImpl();
 		dao.save(dto);
+		SoapDTO temp = dao.readById(1);
+		System.out.println(temp);
 	}
 
 }

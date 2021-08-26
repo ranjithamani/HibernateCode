@@ -22,5 +22,16 @@ public class SoapDAOImpl implements SoapDAO {
 		session.close();
 		factory.close();
 		return primaryKey;
+		
+	}
+	@Override
+	public SoapDTO readById(int primaryKey) {
+		Configuration configure=new Configuration().configure().addAnnotatedClass(SoapDTO .class);
+		SessionFactory factory=configure.buildSessionFactory();
+		Session session=factory.openSession();
+		SoapDTO database=session.get(SoapDTO.class,primaryKey);
+		session.close();
+		factory.close();
+		return database;
 	}
 }

@@ -24,5 +24,13 @@ public class DryfruitDAOImpl implements DryfruitDAO {
 
 		return primaryKey;
 	}
+	@Override
+	public DryfruitDTO readById(int pk) {
+		Configuration configure=new Configuration().configure().addAnnotatedClass(DryfruitDTO.class);
+		SessionFactory factory=configure.buildSessionFactory();
+		Session session= factory.openSession();
+		DryfruitDTO database=session.get(DryfruitDTO.class, pk);
+		return database;
+	}
 
 }

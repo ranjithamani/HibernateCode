@@ -7,12 +7,12 @@ import com.xworkz.dryfruit.dto.DryfruitDTO;
 public class DryfruitTester {
 
 	public static void main(String[] args) {
-		DryfruitDTO dto = new DryfruitDTO(2,"Date","Markstor","India", 1000, "Amazon");
-		//DryfruitDTO dto1 = new DryfruitDTO(3,"Walnuts","Happilo","India", 1500, "BigBasket");
+		DryfruitDTO dto = new DryfruitDTO(3,"Date","Markstor","India", 1000, "Amazon");
 
 		DryfruitDAO dao = new DryfruitDAOImpl();
 		dao.save(dto);
-		//dao.save(dto1);
+		DryfruitDTO temp=dao.readById(2);
+		System.out.println(temp);
 	}
 
 }
