@@ -14,7 +14,7 @@ public class CameraTester {
 		CameraEntity temp=dao.readById(1);
 		System.out.println(temp);
 		dao.updateBrandById(1, "Panasonic");
-		//dao.deleteById(2);
+		dao.deleteById(2);
 	}
 
 }
