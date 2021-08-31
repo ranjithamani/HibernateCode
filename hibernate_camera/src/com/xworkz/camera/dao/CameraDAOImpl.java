@@ -17,7 +17,7 @@ public class CameraDAOImpl implements CameraDAO{
 			Transaction trans=session.beginTransaction();
 			int key=(int)session.save(entity);
 			trans.commit();
-			System.out.println("ranju:"+key);
+			System.out.println(key);
 			return key;
 		}
 	}
