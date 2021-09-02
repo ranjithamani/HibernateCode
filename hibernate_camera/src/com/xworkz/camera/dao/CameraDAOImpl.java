@@ -16,7 +16,7 @@ public class CameraDAOImpl implements CameraDAO {
 
 	@Override
 	public int save(CameraEntity entity) {
-		Integer key = null;
+		Integer key = 0;
 		try (Session session = factory.openSession()) {
 			trans = session.beginTransaction();
 			key = (int) session.save(entity);
@@ -33,8 +33,8 @@ public class CameraDAOImpl implements CameraDAO {
 	@Override
 	public CameraEntity readById(int primaryKey) {
 		try (Session session = factory.openSession()) {
-			CameraEntity database = session.get(CameraEntity.class, primaryKey);
-			return database;
+			CameraEntity entity = session.get(CameraEntity.class, primaryKey);
+			return entity;
 		}
 	}
 
@@ -49,6 +49,7 @@ public class CameraDAOImpl implements CameraDAO {
 			System.out.println("updated:" + entity);
 
 		} catch (Exception e) {
+			
 			trans.rollback();
 			e.printStackTrace();
 		}

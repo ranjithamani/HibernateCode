@@ -22,13 +22,13 @@ public class CameraTester {
 		System.out.println(temp);
 
 		dao.updateBrandById(1, "Panasonic");
-		dao.deleteById(10);
+		dao.deleteById(11);
 
 		List<CameraEntity> list = Arrays.asList(entity, entity1);
 		dao.saveList(list);
+		dao.deleteList(list);
 		
-		List<CameraEntity> collect = Arrays.asList(entity, entity1);
-		dao.deleteList(collect);
+		
 	}
 
 }
