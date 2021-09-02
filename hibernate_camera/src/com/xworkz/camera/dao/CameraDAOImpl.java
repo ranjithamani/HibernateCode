@@ -16,7 +16,7 @@ public class CameraDAOImpl implements CameraDAO {
 
 	@Override
 	public int save(CameraEntity entity) {
-		Integer key = 0;
+		int key = 0;
 		try (Session session = factory.openSession()) {
 			trans = session.beginTransaction();
 			key = (int) session.save(entity);
