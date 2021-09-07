@@ -5,7 +5,11 @@ import com.xworkz.mobile.entity.MobileEntity;
 public interface MobileDAO {
 	
 	int save(MobileEntity entity);
-
-	void read(int id);
-
+    void readAllRecords();
+	double findMobilePriceByBrand(String brand);
+    double findTotalPrice(); 
+    double findMaxPrice();
+    double findMinPrice();
+    void updatePriceByColor();
+    void deleteRowById();
 }

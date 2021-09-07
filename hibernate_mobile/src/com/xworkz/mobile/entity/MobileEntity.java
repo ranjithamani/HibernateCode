@@ -21,25 +21,24 @@ public class MobileEntity implements Serializable {
 	private String color;
 	@Column(name="m_isAndroid")
 	private boolean isAndroid;
+	@Column(name="m_brand")
+    private String brand;
 
 	public MobileEntity() {
-
+		
 	}
-
-	public MobileEntity(double price, String color, boolean isAndroid) {
+	public MobileEntity(double price, String color, boolean isAndroid, String brand) {
 		super();
 		this.price = price;
 		this.color = color;
 		this.isAndroid = isAndroid;
+		this.brand = brand;
 	}
-
-	@Override
+@Override
 	public String toString() {
-		return "MobileEntity [id=" + id + ", price=" + price + ", color=" + color + ", isAndroid=" + isAndroid + "]";
+		return "MobileEntity [id=" + id + ", price=" + price + ", color=" + color + ", isAndroid=" + isAndroid
+				+ ", brand=" + brand + "]";
 	}
-
-	
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -66,37 +65,36 @@ public class MobileEntity implements Serializable {
 			return false;
 		return true;
 	}
-
+	
 	public int getId() {
 		return id;
 	}
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
 	public double getPrice() {
 		return price;
 	}
-
 	public void setPrice(double price) {
 		this.price = price;
 	}
-
 	public String getColor() {
 		return color;
 	}
-
 	public void setColor(String color) {
 		this.color = color;
 	}
-
 	public boolean isAndroid() {
 		return isAndroid;
 	}
-
 	public void setAndroid(boolean isAndroid) {
 		this.isAndroid = isAndroid;
 	}
+	public String getBrand() {
+		return brand;
+	}
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
 
-}
+	}

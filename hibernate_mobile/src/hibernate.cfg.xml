@@ -10,6 +10,7 @@
 		<property name="hibernate.connection.password">Ranju@95</property>	
 		<property name="hibernate.show_sql"	>true</property>
         <property name="format_sql">true</property>
+    <property name="dialect">org.hibernate.dialect.MySQL8Dialect</property>
 		
 		<mapping class="com.xworkz.mobile.entity.MobileEntity"/>				
 	</session-factory>
