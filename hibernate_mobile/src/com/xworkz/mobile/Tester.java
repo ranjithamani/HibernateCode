@@ -1,8 +1,8 @@
 package com.xworkz.mobile;
 
-import com.xworkz.mobile.dao.MobileDAO;
-import com.xworkz.mobile.dao.MobileDAOImpl;
 import com.xworkz.mobile.entity.MobileEntity;
+import com.xworkz.mobile.service.MobileService;
+import com.xworkz.mobile.serviceImpl.MobileServiceImpl;
 
 public class Tester {
 
@@ -10,26 +10,35 @@ public class Tester {
 		MobileEntity entity = new MobileEntity(2000.5d, "Black", true, "VIVO");
 		MobileEntity entity1 = new MobileEntity(3555.5d, "Red", true, "MI");
 
-		MobileDAO dao = new MobileDAOImpl();
-		dao.save(entity);
-		dao.save(entity1);
-		System.out.println("**************************");
-		dao.readAllRecords();
-		System.out.println("*******************");
-		double price = dao.findMobilePriceByBrand("MI");
+		MobileService service = new MobileServiceImpl();
+
+		service.validateAndSave(entity);
+		service.validateAndSave(entity1);
+
+		System.out.println("******************");
+		service.validateAndReadAllRecords();
+
+		System.out.println("**********************************");
+		double price = service.validateAndFindMobilePriceByBrand("MI");
 		System.out.println(price);
 
-		double TotalPrice = dao.findTotalPrice();
-		System.out.println(TotalPrice);
+		System.out.println("**********************");
+		double maxPrice = service.validateAndfindMaxPrice();
+		System.out.println("mobile maxPrice is:" + maxPrice);
 
-		double maxPrice = dao.findMaxPrice();
-		System.out.println(maxPrice);
+		System.out.println("**********************************");
+		double minPrice = service.validateAndfindMinPrice();
+		System.out.println("mobile minPrice is:" + minPrice);
 
-		double minPrice = dao.findMinPrice();
-		System.out.println(minPrice);
+		System.out.println("***********************************");
+		double totalPrice = service.validateAndfindTotalPrice();
+		System.out.println("mobile totalPrice is:" + totalPrice);
 
-		dao.updatePriceByColor();
-		dao.deleteRowById();
+		System.out.println("***************************");
+		service.validateAndUpdatePriceByColor(85000, "Red");
+
+		System.out.println("**********************");
+		service.validateAndDeleteRowById(1);
 	}
 
 }

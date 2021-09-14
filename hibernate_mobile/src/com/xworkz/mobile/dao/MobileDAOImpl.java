@@ -12,13 +12,12 @@ import com.xworkz.mobile.util.SFUtil;
 
 public class MobileDAOImpl implements MobileDAO {
 	private SessionFactory factory = SFUtil.getFactory();
-	Transaction trans = null;
 
 	@Override
 	public int save(MobileEntity entity) {
 		int key = 0;
 		try (Session session = factory.openSession()) {
-			trans = session.beginTransaction();
+			Transaction trans = session.beginTransaction();
 			key = (int) session.save(entity);
 			session.flush();
 			session.clear();
@@ -31,11 +30,9 @@ public class MobileDAOImpl implements MobileDAO {
 	@Override
 	public void readAllRecords() {
 		try (Session session = factory.openSession()) {
-			Query query = session.createQuery("from com.xworkz.mobile.entity.MobileEntity");
+			Query query = session.getNamedQuery("readAllRecords");
 			List<MobileEntity> list = query.list();
-			for (MobileEntity mobileEntity : list) {
-				System.out.println(mobileEntity);
-			}
+			System.out.println(list);
 		}
 	}
 
@@ -43,8 +40,8 @@ public class MobileDAOImpl implements MobileDAO {
 	public double findMobilePriceByBrand(String brand) {
 		double mobilePrice = 0;
 		try (Session session = factory.openSession()) {
-			Query query = session
-					.createQuery("select mobile.price from MobileEntity mobile where mobile.brand='+brand+'");
+			Query query = session.getNamedQuery("findMobilePriceByBrand");
+			query.setParameter("Brand", brand);
 			Object object = query.uniqueResult();
 			if (object != null) {
 				mobilePrice = (double) object;
@@ -57,7 +54,7 @@ public class MobileDAOImpl implements MobileDAO {
 	public double findTotalPrice() {
 		double mobilePrice = 0;
 		try (Session session = factory.openSession()) {
-			Query query = session.createQuery("select sum(price) from MobileEntity");
+			Query query = session.getNamedQuery("findTotalPrice");
 			Object object = query.uniqueResult();
 			if (object != null) {
 				mobilePrice = (double) object;
@@ -70,7 +67,7 @@ public class MobileDAOImpl implements MobileDAO {
 	public double findMaxPrice() {
 		double mobilePrice = 0;
 		try (Session session = factory.openSession()) {
-			Query query = session.createQuery("select max(price) from MobileEntity");
+			Query query = session.getNamedQuery("findMaxPrice");
 			Object object = query.uniqueResult();
 			if (object != null) {
 				mobilePrice = (double) object;
@@ -83,7 +80,7 @@ public class MobileDAOImpl implements MobileDAO {
 	public double findMinPrice() {
 		double mobilePrice = 0;
 		try (Session session = factory.openSession()) {
-			Query query = session.createQuery("select min(price) from MobileEntity");
+			Query query = session.getNamedQuery("findMinPrice");
 			Object object = query.uniqueResult();
 			if (object != null) {
 				mobilePrice = (double) object;
@@ -93,22 +90,28 @@ public class MobileDAOImpl implements MobileDAO {
 	}
 
 	@Override
-	public void updatePriceByColor() {
+	public void updatePriceByColor(double price, String color) {
 		try (Session session = factory.openSession()) {
-			Query query = session
-					.createQuery("update MobileEntity mobile set mobile.price='75000.0'where mobile.color='Red'");
 			session.beginTransaction();
-			query.executeUpdate();
+
+			Query query = session.getNamedQuery("updatePriceByColor");
+			query.setParameter("Price", price);
+			query.setParameter("Color", color);
+
+			int updatedprice = query.executeUpdate();
+			System.out.println(updatedprice);
 			session.getTransaction().commit();
 		}
 	}
 
 	@Override
-	public void deleteRowById() {
+	public void deleteRowById(int id) {
 		try (Session session = factory.openSession()) {
-			Query query = session.createQuery("delete MobileEntity  mobile where mobile.id=1");
 			session.beginTransaction();
-			query.executeUpdate();
+			Query query = session.createQuery("deleteRowById");
+			query.setParameter("Id", id);
+			int deleted = query.executeUpdate();
+			System.out.println(deleted);
 			session.getTransaction().commit();
 		}
 	}

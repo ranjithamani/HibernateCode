@@ -10,6 +10,6 @@ public interface MobileDAO {
     double findTotalPrice(); 
     double findMaxPrice();
     double findMinPrice();
-    void updatePriceByColor();
-    void deleteRowById();
+    void updatePriceByColor(double price,String color);
+    void deleteRowById(int id);
 }
